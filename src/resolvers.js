@@ -9,6 +9,9 @@
       },
       users: ()=>{
         return User.findAll()
+      },
+      categories: ()=>{
+        return Category.findAll()
       }
     },
     News: {
@@ -37,19 +40,19 @@
         return newNews;
 
       },
-      // addUser: async (root,args) =>{
-      //   const newUser = await User.create({
-      //     username:args.username,
-      //     email:args.email,
-      //     firstName:args.firstName,
-      //     lastName:args.lastName,
-      //     isAuthor:args.isAuthor
-      //   })
-      //   return newUser
-      // },
-      // addCategory: async (root,args)=>{
-      //   const newCategory = await Category.create({name:args.name})
-      //   return newCategory
-      // }
+      addUser: async (root,args) =>{
+        const newUser = await User.create({
+          username:args.username,
+          email:args.email,
+          firstName:args.firstName,
+          lastName:args.lastName,
+          isAuthor:args.isAuthor
+        })
+        return newUser
+      },
+      addCategory: async (root,args)=>{
+        const newCategory = await Category.create({name:args.name})
+        return newCategory
+      }
     },
   };
