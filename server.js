@@ -21,7 +21,7 @@ server.use('/graphiql', graphiqlExpress({
 server.get('/', function (req, res) {
   res.send('Hello World!');
 });
-models.sequelize.sync().then( ()=> {
+models.sequelize.sync({force:true}).then( ()=> {
   server.listen(PORT, () => console.log(`GraphQL Server is now running on http://localhost:${PORT}`));
   server.on('error', ()=>console.log("error"));
   server.on('listening', ()=>console.log("listening"));

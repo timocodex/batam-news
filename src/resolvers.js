@@ -1,4 +1,5 @@
   import models from '../models'
+  import gen from '../helper/idGenerator'
   const User = models.User
   const News = models.News
   const Category = models.Category
@@ -30,6 +31,7 @@
     Mutation: {
       addNews: async (root, args) => {
         const newNews = await News.create({
+          id:gen(),
           UserId:args.user,
           CategoryId:args.category,
           title: args.title,
@@ -42,6 +44,8 @@
       },
       addUser: async (root,args) =>{
         const newUser = await User.create({
+          id:gen(),
+          password:args.password,
           username:args.username,
           email:args.email,
           firstName:args.firstName,
@@ -51,7 +55,7 @@
         return newUser
       },
       addCategory: async (root,args)=>{
-        const newCategory = await Category.create({name:args.name})
+        const newCategory = await Category.create({id:gen(),name:args.name})
         return newCategory
       }
     },

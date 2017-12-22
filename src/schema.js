@@ -34,7 +34,7 @@ import {
 
     type Mutation {
       addNews(user:Int!,category:Int!,title: String!,content:String!,featured:Boolean!): News
-      addUser(username:String!,email:String!,firstName:String!,lastName:String!,isAuthor:Boolean!): User
+      addUser(username:String!,password:String!,email:String!,firstName:String!,lastName:String!,isAuthor:Boolean!): User
       addCategory(name:String!): Category
     }
     `;

@@ -5,7 +5,6 @@ export default (sequelize, DataTypes) => {
         primaryKey:true,
         unique:true,
       },
-      title:DataTypes.STRING,
       content:DataTypes.TEXT,
       isFeatured:DataTypes.BOOLEAN,
       clickCount:DataTypes.INTEGER,
