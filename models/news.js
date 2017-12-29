@@ -18,6 +18,8 @@ export default (sequelize, DataTypes) => {
       News.belongsTo(models.Category,{
           foreignKey:'CategoryId'
       })
+      News.hasMany(models.Comment)
+      News.hasMany(models.File)
     };
   
     return News;

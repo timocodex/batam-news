@@ -10,7 +10,10 @@ const sequelize = new Sequelize(config.database,config.username,config.password,
 const models = {
     User: sequelize.import('./user'),
     News: sequelize.import('./news'),
-    Category: sequelize.import('./category')
+    Category: sequelize.import('./category'),
+    Comment : sequelize.import('./comment'),
+    File: sequelize.import('./file'),
+    Reply: sequelize.import('./reply')
 };
 
 Object.keys(models).forEach(modelName => {
