@@ -4,7 +4,13 @@ const config = {
   "password": "",
   "database": "BatamNews",
   "host": "127.0.0.1",
-  "dialect": "mysql"  
+  "dialect": "mysql" 
+
+  // "username": process.env.MY_USER,
+  // "password": process.env.MY_PASS,
+  // "database": process.env.MY_DBN,
+  // "host": process.env.MY_HOST,
+  // "dialect": "mysql",
 }
 const sequelize = new Sequelize(config.database,config.username,config.password,config);
 const models = {

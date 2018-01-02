@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors'
 import { schema } from './src';
 import models from './models'
-const PORT = 4000;
+
 
 
 const server = express();
@@ -21,9 +21,5 @@ server.use('/graphiql', graphiqlExpress({
 server.get('/', function (req, res) {
   res.send('Hello World!');
 });
-models.sequelize.sync().then( ()=> {
-  server.listen(PORT, () => console.log(`GraphQL Server is now running on http://localhost:${PORT}`));
-  server.on('error', ()=>console.log("error"));
-  server.on('listening', ()=>console.log("listening"));
-});
 
+module.exports = server;
