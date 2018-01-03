@@ -1,6 +1,6 @@
-import models from '../../models'
+import models from '../models'
 import { createWriteStream } from 'fs'
-import gen from '../../helper/idGenerator'
+import gen from '../helper/idGenerator'
 import { GraphQLUpload } from 'apollo-upload-server'
 import  storage from '@google-cloud/storage'
 

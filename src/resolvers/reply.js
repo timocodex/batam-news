@@ -1,5 +1,5 @@
-import models from '../../models'
-import gen from '../../helper/idGenerator'
+import models from '../models'
+import gen from '../helper/idGenerator'
 
 const Reply = models.Reply
 export default {

@@ -1,17 +1,9 @@
 import Sequelize from 'sequelize'
-const config = {
-  "username": "root",
-  "password": "",
-  "database": "BatamNews",
-  "host": "127.0.0.1",
-  "dialect": "mysql" 
-
-  // "username": process.env.MY_USER,
-  // "password": process.env.MY_PASS,
-  // "database": process.env.MY_DBN,
-  // "host": process.env.MY_HOST,
-  // "dialect": "mysql",
-}
+const env       = process.env.NODE_ENV || 'development';
+console.log(env)
+console.log(__dirname)
+const config    = require(__dirname + '/../config/config.js')[env];
+console.log(config)
 const sequelize = new Sequelize(config.database,config.username,config.password,config);
 const models = {
     User: sequelize.import('./user'),

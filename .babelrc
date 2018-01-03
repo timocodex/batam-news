@@ -1,7 +1,13 @@
 {
-    "passPerPreset": true,
-    "presets": [
-      "es2015",
-      "stage-0"
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "9.2"
+        }
+      }
     ]
+  ],
+  "plugins": ["transform-object-rest-spread"]
 }
