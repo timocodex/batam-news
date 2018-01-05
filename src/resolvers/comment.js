@@ -18,7 +18,7 @@ export default {
   },
   Mutation: {
     addComment: async (root,args)=>{
-      const newComment = await Comment.create({id:gen(),UserId:args.user,content:args.content,NewsId:args.news})
+      const newComment = await Comment.create({id:gen(),UserId:args.userId,content:args.content,NewsId:args.newsId})
       return newComment
     }
   },

@@ -26,12 +26,11 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-//models.sequelize.sync({}).then( ()=> {
-server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
-server.on('error', () => console.log("error"));
-server.on('listening', () => console.log("listening"));
-//});
-
+models.sequelize.sync({}).then(() => {
+  server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
+  server.on('error', () => console.log("error"));
+  server.on('listening', () => console.log("listening"));
+});
 
 /**
  * Normalize a port into a number, string, or false.

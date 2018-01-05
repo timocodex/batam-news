@@ -45,14 +45,19 @@ exports.default = {
     addNews: async (root, args) => {
       const newNews = await News.create({
         id: (0, _idGenerator2.default)(),
-        UserId: args.user,
-        CategoryId: args.category,
+        UserId: args.userId,
+        CategoryId: args.categoryId,
         title: args.title,
         clickCount: 0,
         content: args.content,
         isFeatured: args.featured
       });
       return newNews;
+    },
+    updateClickCount: async (root, args) => {
+      const thisNews = await News.findById(args.newsId);
+      const updateClick = await thisNews.update({ clickCount: thisNews.clickCount + 1 });
+      return updateClick;
     }
   }
 };

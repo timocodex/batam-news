@@ -29,7 +29,7 @@ const typeDefs = (0, _mergeGraphqlSchemas.mergeTypes)((0, _mergeGraphqlSchemas.f
 const schema = (0, _graphqlTools.makeExecutableSchema)({ typeDefs, resolvers });
 
 const server = (0, _express2.default)();
-server.use('*', (0, _cors2.default)({ origin: 'http://localhost:3000' }));
+server.use((0, _cors2.default)('*'));
 
 server.use('/graphql', _bodyParser2.default.json(), (0, _graphqlServerExpress.graphqlExpress)({
   schema

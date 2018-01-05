@@ -28,8 +28,9 @@ exports.default = {
   },
   Mutation: {
     addReply: async (root, args) => {
-      const newReply = await Reply.create({ id: (0, _idGenerator2.default)(), UserId: args.user, CommentId: args.comment, content: args.content });
+      const newReply = await Reply.create({ id: (0, _idGenerator2.default)(), UserId: args.userId, CommentId: args.commentId, content: args.content });
       return newReply;
     }
+
   }
 };

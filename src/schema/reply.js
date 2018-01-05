@@ -8,6 +8,6 @@ type Query {
   replies(comment:String!): [Reply]
 }
 type Mutation {
-  addReply(user:String!,comment:String!,content:String!): Reply
+  addReply(userId:String!,commentId:String!,content:String!): Reply
 }
 `;

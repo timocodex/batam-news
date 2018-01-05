@@ -31,7 +31,7 @@ exports.default = {
   },
   Mutation: {
     addComment: async (root, args) => {
-      const newComment = await Comment.create({ id: (0, _idGenerator2.default)(), UserId: args.user, content: args.content, NewsId: args.news });
+      const newComment = await Comment.create({ id: (0, _idGenerator2.default)(), UserId: args.userId, content: args.content, NewsId: args.newsId });
       return newComment;
     }
   }

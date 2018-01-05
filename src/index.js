@@ -17,7 +17,7 @@ const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 const server = express();
-server.use('*', cors({ origin: 'http://localhost:3000' }));
+server.use(cors('*'));
 
 server.use('/graphql', bodyParser.json(), graphqlExpress({
   schema

@@ -17,6 +17,7 @@
       newsByCategory(category:String!):[News]  
     }
     type Mutation {
-      addNews(user:String!,category:String!,title: String!,content:String!,featured:Boolean!): News
+      addNews(userId:String!,categoryId:String!,title: String!,content:String!,featured:Boolean!): News
+      updateClickCount(newsId:String!):News
     }
     `;

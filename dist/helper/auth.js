@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const createTokens = exports.createTokens = async (user, secret, secret2) => {
   const createToken = _jsonwebtoken2.default.sign({
-    user: _lodash2.default.pick(user, ['id'])
+    user: _lodash2.default.pick(user, ['id', 'username'])
   }, secret, {
     expiresIn: '1h'
   });
@@ -35,8 +35,8 @@ const createTokens = exports.createTokens = async (user, secret, secret2) => {
   return [createToken, createRefreshToken];
 };
 
-const refreshTokens = exports.refreshTokens = async (token, refreshToken, models, SECRET) => {
-  let userId = -1;
+const refreshTokens = exports.refreshTokens = async (token, refreshToken, models, SECRET, SECRET2) => {
+  let userId = 0;
   try {
     const { user: { id } } = _jsonwebtoken2.default.decode(refreshToken);
     userId = id;
@@ -54,13 +54,15 @@ const refreshTokens = exports.refreshTokens = async (token, refreshToken, models
     return {};
   }
 
+  const refreshSecret = user.password + SECRET2;
+
   try {
-    _jsonwebtoken2.default.verify(refreshToken, user.refreshSecret);
+    _jsonwebtoken2.default.verify(refreshToken, refreshSecret);
   } catch (err) {
     return {};
   }
 
-  const [newToken, newRefreshToken] = await createTokens(user, SECRET, user.refreshSecret);
+  const [newToken, newRefreshToken] = await createTokens(user, SECRET, refreshSecret);
   return {
     token: newToken,
     refreshToken: newRefreshToken,

@@ -9,6 +9,6 @@ type Query {
   comments(news:String!): [Comment]
 }
 type Mutation {
-  addComment(user:String!,content:String!,news:String!): Comment
+  addComment(userId:String!,content:String!,newsId:String!): Comment
 }
 `;
