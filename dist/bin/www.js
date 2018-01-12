@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
+var _models = require('../models');
+
+var _models2 = _interopRequireDefault(_models);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * Module dependencies.
  */
@@ -8,7 +14,7 @@
 var app = require('../index.js');
 var debug = require('debug')('batam-news:server');
 var http = require('http');
-var models = require('../models');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -25,11 +31,12 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-models.sequelize.sync({}).then(() => {
-  server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
-  server.on('error', () => console.log("error"));
-  server.on('listening', () => console.log("listening"));
+(0, _models2.default)().then(models => {
+  models.sequelize.sync({}).then(() => {
+    server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
+    server.on('error', onError);
+    server.on('listening', onListening);
+  });
 });
 
 /**

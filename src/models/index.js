@@ -1,9 +1,7 @@
 import Sequelize from 'sequelize'
 const env       = process.env.NODE_ENV || 'development';
-console.log(env)
-console.log(__dirname)
 const config    = require(__dirname + '/../config/config.js')[env];
-console.log(config)
+export default async () => {
 const sequelize = new Sequelize(config.database,config.username,config.password,config);
 const models = {
     User: sequelize.import('./user'),
@@ -23,4 +21,5 @@ Object.keys(models).forEach(modelName => {
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 
-module.exports = models;
+return models;
+}

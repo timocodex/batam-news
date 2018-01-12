@@ -1,11 +1,9 @@
-import models from '../models'
-import gen from '../helper/idGenerator'
+import gen from '../helpers/idGenerator'
 
-const Comment = models.Comment
 export default {
   Query: {
-    comments: (root,args)=>{
-      return Comment.findAll({where:{NewsId:args.news}})
+    comments: (root,args,{models})=>{
+      return models.Comment.findAll({where:{NewsId:args.news}})
     }
   },
   Comment: {
@@ -17,8 +15,14 @@ export default {
     }
   },
   Mutation: {
-    addComment: async (root,args)=>{
-      const newComment = await Comment.create({id:gen(),UserId:args.userId,content:args.content,NewsId:args.newsId})
+    addComment: async (root,args,{models})=>{
+      let newComment
+      if(args.isLogin === false){
+        let useranon = await models.User.findOne({where:{username:"anonymous"}})
+        newComment = await models.Comment.create({id:gen(),UserId:useranon.id,content:args.content,NewsId:args.newsId}) 
+      }else{
+        newComment = await models.Comment.create({id:gen(),UserId:args.userId,content:args.content,NewsId:args.newsId})
+      }
       return newComment
     }
   },

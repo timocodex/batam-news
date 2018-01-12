@@ -1,7 +1,5 @@
-import models from '../models'
-import gen from '../helper/idGenerator'
+import gen from '../helpers/idGenerator'
 
-const Reply = models.Reply
 export default {
   Query: {
     replies: (root,args)=>{
@@ -14,8 +12,14 @@ export default {
     }
   },
   Mutation: {
-    addReply: async (root,args)=>{
-      const newReply = await Reply.create({id:gen(),UserId:args.userId,CommentId:args.commentId,content:args.content})
+    addReply: async (root,args,{models})=>{
+      let newReply
+      if(args.isLogin === false){
+        let useranon = await models.User.findOne({where:{username:"anonymous"}})
+        newReply = await models.Reply.create({id:gen(),UserId:useranon.id,CommentId:args.commentId,content:args.content}) 
+      }else{
+        newReply = await Reply.create({id:gen(),UserId:args.userId,CommentId:args.commentId,content:args.content})
+      }
       return newReply
     },
 

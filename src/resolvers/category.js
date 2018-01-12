@@ -1,11 +1,9 @@
-import models from '../models'
-import gen from '../helper/idGenerator'
+import gen from '../helpers/idGenerator'
 
-const Category = models.Category
 export default {
   Query: {
-    categories: ()=>{
-      return Category.findAll()
+    categories: (root,args,{models})=>{
+      return models.Category.findAll()
     }
   },
   Category:{
@@ -14,8 +12,8 @@ export default {
     }
   },
   Mutation: {
-    addCategory: async (root,args)=>{
-      const newCategory = await Category.create({id:gen(),name:args.name})
+    addCategory: async (root,args,{models})=>{
+      const newCategory = await models.Category.create({id:gen(),name:args.name})
       return newCategory
     }
   },

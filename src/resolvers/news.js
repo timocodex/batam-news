@@ -1,17 +1,15 @@
-import models from '../models'
-import gen from '../helper/idGenerator'
+import gen from '../helpers/idGenerator'
 
-const News = models.News
 export default {
   Query: {
-    allNews: () => {
-      return News.findAll()
+    allNews: (root,args,{models}) => {
+      return models.News.findAll()
     },
-    newsByCategory: (root,args)=>{
-      return News.findAll({where:{CategoryId:category}})
+    newsByCategory: (root,args,{models})=>{
+      return models.News.findAll({where:{CategoryId:args.categoryId}})
     },
-    news: (root,args) =>{
-        return News.findById(args.id)
+    news: (root,args,{models}) =>{
+        return models.News.findById(args.id)
     }
   },
   News: {
@@ -29,8 +27,8 @@ export default {
     }
   },
   Mutation: {
-    addNews: async (root, args) => {
-      const newNews = await News.create({
+    addNews: async (root, args,{models}) => {
+      const newNews = await models.News.create({
         id:gen(),
         UserId:args.userId,
         CategoryId:args.categoryId,
@@ -39,10 +37,15 @@ export default {
         content:args.content,
         isFeatured:args.featured
       });
+      const file = await models.File.create({
+        id:gen(),
+        path:args.picturePath,
+        NewsId:newNews.id
+      })
       return newNews;
     },
-    updateClickCount: async(root,args)=>{
-      const thisNews = await News.findById(args.newsId)
+    updateClickCount: async(root,args,{models})=>{
+      const thisNews = await models.News.findById(args.newsId)
       const updateClick = await thisNews.update({clickCount:thisNews.clickCount+1})
       return updateClick
     }

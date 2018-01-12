@@ -1,24 +1,19 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _models = require('../models');
-
-var _models2 = _interopRequireDefault(_models);
-
-var _idGenerator = require('../helper/idGenerator');
+var _idGenerator = require("../helpers/idGenerator");
 
 var _idGenerator2 = _interopRequireDefault(_idGenerator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const Comment = _models2.default.Comment;
 exports.default = {
   Query: {
-    comments: (root, args) => {
-      return Comment.findAll({ where: { NewsId: args.news } });
+    comments: (root, args, { models }) => {
+      return models.Comment.findAll({ where: { NewsId: args.news } });
     }
   },
   Comment: {
@@ -30,8 +25,14 @@ exports.default = {
     }
   },
   Mutation: {
-    addComment: async (root, args) => {
-      const newComment = await Comment.create({ id: (0, _idGenerator2.default)(), UserId: args.userId, content: args.content, NewsId: args.newsId });
+    addComment: async (root, args, { models }) => {
+      let newComment;
+      if (args.isLogin === false) {
+        let useranon = await models.User.findOne({ where: { username: "anonymous" } });
+        newComment = await models.Comment.create({ id: (0, _idGenerator2.default)(), UserId: useranon.id, content: args.content, NewsId: args.newsId });
+      } else {
+        newComment = await models.Comment.create({ id: (0, _idGenerator2.default)(), UserId: args.userId, content: args.content, NewsId: args.newsId });
+      }
       return newComment;
     }
   }

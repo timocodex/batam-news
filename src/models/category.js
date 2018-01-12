@@ -16,4 +16,4 @@ export default (sequelize, DataTypes) => {
     };
   
     return Category;
-  };
+};

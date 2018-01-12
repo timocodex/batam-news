@@ -7,7 +7,7 @@
 var app = require('../index.js');
 var debug = require('debug')('batam-news:server');
 var http = require('http');
-var models = require('../models')
+import getModels from '../models'
 /**
  * Get port from environment and store in Express.
  */
@@ -24,12 +24,14 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
+getModels().then(models =>{
+  models.sequelize.sync({}).then( ()=> {
+    server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
+    server.on('error', onError);
+    server.on('listening', onListening);
+  });
+})
 
-models.sequelize.sync({}).then( ()=> {
-  server.listen(port, () => console.log(`GraphQL Server is now running on http://localhost:${port}`));
-  server.on('error', ()=>console.log("error"));
-  server.on('listening', ()=>console.log("listening"));
-});
 
 
 /**

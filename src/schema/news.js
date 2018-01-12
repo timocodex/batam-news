@@ -14,10 +14,10 @@
     type Query {
       allNews: [News]
       news(id:String!): News 
-      newsByCategory(category:String!):[News]  
+      newsByCategory(categoryId:String!):[News]  
     }
     type Mutation {
-      addNews(userId:String!,categoryId:String!,title: String!,content:String!,featured:Boolean!): News
+      addNews(userId:String!,categoryId:String!,title: String!,content:String!,featured:Boolean!,picturePath:String): News
       updateClickCount(newsId:String!):News
     }
     `;

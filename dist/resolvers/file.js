@@ -10,7 +10,7 @@ var _models2 = _interopRequireDefault(_models);
 
 var _fs = require('fs');
 
-var _idGenerator = require('../helper/idGenerator');
+var _idGenerator = require('../helpers/idGenerator');
 
 var _idGenerator2 = _interopRequireDefault(_idGenerator);
 

@@ -13,6 +13,6 @@ type Query {
   replies(comment:String!): [Reply]
 }
 type Mutation {
-  addReply(userId:String!,commentId:String!,content:String!): Reply
+  addReply(isLogin:Boolean!,userId:String,commentId:String!,content:String!): Reply
 }
 `;
