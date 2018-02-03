@@ -1,17 +1,17 @@
 "use strict";
 
 module.exports = {
-  "development": {
-    "username": "root",
-    "password": "",
-    "database": "BatamNews",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
   "test": {
     "username": "root",
+    "password": "kMF1tL1PnIMfsyAq",
+    "database": "bacalah",
+    "host": "35.187.218.165",
+    "dialect": "mysql"
+  },
+  "development": {
+    "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "BatamNews",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

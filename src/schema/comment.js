@@ -4,6 +4,7 @@ type Comment {
   content:String
   user: User
   replies:[Reply]
+  createdAt:String
 }
 type Query {
   comments(news:String!): [Comment]

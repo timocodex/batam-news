@@ -39,6 +39,8 @@ const server = (0, _express2.default)();
 server.use((0, _cors2.default)('*'));
 server.set('views', _path2.default.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
+// server.use(express.static(path.join(__dirname,'client/build')));
+
 
 const addUser = async (req, res, next) => {
   const token = req.headers['x-token'];
@@ -59,7 +61,8 @@ const addUser = async (req, res, next) => {
   }
   next();
 };
-
+const upload = require('./routes/upload');
+server.use('/api/uploads', upload);
 server.use(addUser);
 
 (0, _models2.default)().then(models => {
@@ -80,6 +83,9 @@ server.use(addUser);
     endpointURL: '/graphql'
   }));
 
+  // server.get('*', (req, res) => {
+  //     res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  // });
   server.get('/api', function (req, res) {
     res.send('res');
   });

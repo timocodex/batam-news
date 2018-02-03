@@ -9,6 +9,7 @@ export default (sequelize, DataTypes) => {
       content:DataTypes.TEXT,
       isFeatured:DataTypes.BOOLEAN,
       clickCount:DataTypes.INTEGER,
+      pictureDetail:DataTypes.STRING
     });
   
     News.associate = function(models) {

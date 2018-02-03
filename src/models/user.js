@@ -19,12 +19,13 @@ export default (sequelize, DataTypes) => {
     },
     firstName:DataTypes.STRING,
     lastName:DataTypes.STRING,
-    isAuthor:DataTypes.BOOLEAN
+    isAdmin:DataTypes.BOOLEAN
   });
 
   User.associate = function(models) {
     User.hasMany(models.News)
   };
+
 
   User.beforeCreate(function(user, options) {
     return cryptPassword(user.password)
@@ -36,7 +37,16 @@ export default (sequelize, DataTypes) => {
         if (err) console.log(err);
       });
   });
-
+  User.beforeUpdate(function(user, options) {
+    return cryptPassword(user.password)
+      .then(success => {
+        user.password = success.hash
+        user.salt = success.salt
+      })
+      .catch(err => {
+        if (err) console.log(err);
+      });
+  }); 
   function cryptPassword(password) {
     const saltRounds = 10
     console.log("cryptPassword" + password);

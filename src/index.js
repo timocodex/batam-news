@@ -24,7 +24,7 @@ const server = express();
 server.use(cors('*'));
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
-
+// server.use(express.static(path.join(__dirname,'client/build')));
 
 
 const addUser = async (req, res, next) => {
@@ -70,6 +70,9 @@ getModels().then((models) => {
     endpointURL: '/graphql'
   }));
   
+  // server.get('*', (req, res) => {
+  //     res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  // });
   server.get('/api', function (req, res) {
    res.send('res');
   });

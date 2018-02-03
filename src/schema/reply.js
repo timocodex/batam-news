@@ -2,7 +2,8 @@ export default `
 type Reply {
   id: ID! 
   content:String
-  user: User
+  user: User,
+  createdAt:String
 }
 type Query {
   replies(comment:String!): [Reply]

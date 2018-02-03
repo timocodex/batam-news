@@ -14,7 +14,8 @@ exports.default = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
     isFeatured: DataTypes.BOOLEAN,
-    clickCount: DataTypes.INTEGER
+    clickCount: DataTypes.INTEGER,
+    pictureDetail: DataTypes.STRING
   });
 
   News.associate = function (models) {

@@ -10,15 +10,17 @@ exports.default = `
       email:String!
       firstName:String
       lastName:String
-      isAuthor:Boolean
+      isAdmin:Boolean
       news:[News]
     }
     type RegisterResponse {
       ok: Boolean!
       user: User
-      token: String
-      refreshToken: String
       errors: [Error!]
+    }
+    type ChangePasswordResponse{
+      ok:Boolean!
+      errors:[Error!]
     }
     type LoginResponse {
       ok: Boolean!
@@ -30,7 +32,9 @@ exports.default = `
       users: [User]
     }
     type Mutation {
-      addUser(username:String!,password:String!,email:String!,firstName:String!,lastName:String!,isAuthor:Boolean!): RegisterResponse
+      addUser(userId:String!,username:String!,password:String!,email:String!,firstName:String!,lastName:String!,isAdmin:Boolean!): RegisterResponse
       login(email:String!,password:String!):LoginResponse
+      editProfile(userId:String!,username:String,email:String,firstName:String,lastName:String):RegisterResponse
+      changePassword(userId:String!,oldPassword:String!,newPassword:String!):ChangePasswordResponse
     }
     `;

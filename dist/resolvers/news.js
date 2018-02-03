@@ -45,7 +45,8 @@ exports.default = {
         title: args.title,
         clickCount: 0,
         content: args.content,
-        isFeatured: args.featured
+        isFeatured: args.featured,
+        pictureDetail: args.pictureDetail
       });
       const file = await models.File.create({
         id: (0, _idGenerator2.default)(),
@@ -58,6 +59,17 @@ exports.default = {
       const thisNews = await models.News.findById(args.newsId);
       const updateClick = await thisNews.update({ clickCount: thisNews.clickCount + 1 });
       return updateClick;
+    },
+    editNews: async (root, args, { models }) => {
+      const news = await models.News.findById(args.newsId);
+      const edit = await news.updateAttributes(args);
+      const destroy = await models.File.destroy({ where: { NewsId: news.id } });
+      const file = await models.File.create({
+        id: (0, _idGenerator2.default)(),
+        path: args.picturePath,
+        NewsId: news.id
+      });
+      return news;
     }
   }
 };
