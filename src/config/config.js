@@ -20,7 +20,7 @@ module.exports = {
       "host": process.env.MY_HOST,
       "dialect": "mysql",
       "dialectOptions": {
-        "socketPath": "/cloudsql/"+"batam-news:asia-northeast1:bacalahsql"
+        "socketPath": "/cloudsql/"+"inbound-hawk-157511:us-central1:bacalahdb"
       }
     }
 
